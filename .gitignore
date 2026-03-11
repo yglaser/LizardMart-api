@@ -56,3 +56,5 @@ pids
 # OS-specific
 .DS_Store
 Thumbs.db
+
+/generated/prisma
