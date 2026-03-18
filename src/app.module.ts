@@ -7,6 +7,8 @@ import { OrdersModule } from './modules/orders/orders.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import { TwoFAService } from './modules/auth/2fa/twofa/twofa.service';
+import { TwoFAController } from './modules/auth/2fa/twofa/twofa.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,5 +22,7 @@ import { ConfigModule } from '@nestjs/config';
     OrdersModule,
     PaymentsModule,
   ],
+  providers: [TwoFAService],
+  controllers: [TwoFAController],
 })
 export class AppModule {}

@@ -9,8 +9,15 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
-  password  String
+  password  String?
   createdAt DateTime @default(now())
+    avatar           String?
+  provider         String?
+  providerId       String?
+  name             String?
+  twoFactorEnabled Boolean  @default(false)
+  twoFactorSecret  String?
+
   cart      Cart?
   orders    Order[]
 }
