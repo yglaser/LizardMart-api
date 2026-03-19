@@ -2,12 +2,13 @@ service: nestjs-serverless
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs22.x
   region: us-east-1
 
 functions:
   api:
-    handler: dist/lambda.handler
+    handler: dist/src/lambda/lambda.handler
+    timeout: 30
     events:
       - httpApi: '*'
 

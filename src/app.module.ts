@@ -15,6 +15,7 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt.guard';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      ignoreEnvFile: true,
     }),
     PrismaModule,
     AuthModule,

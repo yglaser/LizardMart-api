@@ -1,11 +1,10 @@
-import 'dotenv/config';
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt.guard';
 
 export async function createApp() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { logger: false });
 
   // ✅ CORS
   app.enableCors({

@@ -3,16 +3,13 @@ import { createApp } from '../app';
 
 let server;
 
+const serverPromise = createApp().then((app) => {
+  const expressApp = app.getHttpAdapter().getInstance();
+  return serverlessExpress({ app: expressApp });
+});
+
 export const handler = async (event, context) => {
-  if (!server) {
-    const app = await createApp();
-
-    const expressApp = app.getHttpAdapter().getInstance();
-
-    server = serverlessExpress({
-      app: expressApp,
-    });
-  }
-
+  context.callbackWaitsForEmptyEventLoop = false;
+  server = server ?? (await serverPromise);
   return server(event, context);
 };
