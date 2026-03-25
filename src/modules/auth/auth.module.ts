@@ -8,13 +8,17 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { MicrosoftStrategy } from './strategies/microsoft.strategy';
 import { FacebookStrategy } from './strategies/meta.strategy';
-
+import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '1h' },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        secret: config.getOrThrow<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '1h' },
+      }),
     }),
     UsersModule,
   ],
@@ -25,7 +29,6 @@ import { FacebookStrategy } from './strategies/meta.strategy';
     GoogleStrategy,
     MicrosoftStrategy,
     FacebookStrategy,
-    
   ],
 })
 export class AuthModule {}

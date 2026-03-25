@@ -11,11 +11,16 @@ import { TwoFAService } from './modules/auth/2fa/twofa/twofa.service';
 import { TwoFAController } from './modules/auth/2fa/twofa/twofa.controller';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/guards/jwt.guard';
+import { S3Module } from './aws/s3/s3.module';
+import { SqsModule } from './aws/sqs/sqs.module';
+import awsConfig from './config/aws.config';
+import { RolesGuard } from './modules/auth/guards/roles.guard';
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      ignoreEnvFile: true,
+      ignoreEnvFile: process.env.NODE_ENV === 'production',
+      load: [awsConfig],
     }),
     PrismaModule,
     AuthModule,
@@ -24,12 +29,18 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt.guard';
     CartModule,
     OrdersModule,
     PaymentsModule,
+    S3Module,
+    SqsModule,
   ],
   providers: [
     TwoFAService,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
   controllers: [TwoFAController],

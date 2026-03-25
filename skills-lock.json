@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "nestjs-best-practices": {
+      "source": "kadajett/agent-nestjs-skills",
+      "sourceType": "github",
+      "computedHash": "68658903272e1015f3ec5084c7d0988216a47f42f675ed819a675250fc6a23cd"
+    },
+    "prisma-orm-v7-skills": {
+      "source": "gocallum/nextjs16-agent-skills",
+      "sourceType": "github",
+      "computedHash": "371d23a97d15be1fdd5ae350b4b2a151045e8fabf83aed0b2d716e747f7ea6d2"
+    }
+  }
+}

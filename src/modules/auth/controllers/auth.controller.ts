@@ -11,6 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../services/auth.service';
 import { Public } from '../decorators/public.decorator';
 import { LoginDto } from '../dto/login.dto';
+import { RegisterDto } from '../dto/register.dto';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -29,7 +30,7 @@ export class AuthController {
 
   @Public()
   @Post('register')
-  async register(@Body() body) {
+  async register(@Body() body: RegisterDto) {
     return this.authService.register(body);
   }
 

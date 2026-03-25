@@ -61,7 +61,6 @@ export class AuthService {
   }
 
   generateJwt(user: { id: string; email: string }) {
-    console.log('Generating JWT for user:', user);
     return this.jwtService.sign({
       sub: user.id,
       email: user.email,

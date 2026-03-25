@@ -3,6 +3,7 @@ import {
   IsInt,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
   MaxLength,
@@ -31,6 +32,7 @@ export class CreateProductDto {
   stock: number;
 
   @IsString()
+  @IsOptional()
   @IsNotEmpty()
   @MaxLength(500)
   imageUrl?: string;
